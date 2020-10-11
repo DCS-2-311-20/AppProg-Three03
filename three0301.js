@@ -117,9 +117,9 @@ function init() {
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
     // 物体の回転
-    cube.rotation.x += 0.01*rotateSpeed.x
-    cube.rotation.y += 0.01*rotateSpeed.y
-    cube.rotation.z += 0.01*rotateSpeed.z
+    cube.rotation.x += 0.01*rotateSpeed.x;
+    cube.rotation.y += 0.01*rotateSpeed.y;
+    cube.rotation.z += 0.01*rotateSpeed.z;
     // 次のフレーム描画時の呼び出しを要求
     requestAnimationFrame(update);
   }
