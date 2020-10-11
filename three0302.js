@@ -98,7 +98,6 @@ function init() {
     cameraUpdate();
     lightUpdate();
     renderer.render(scene, camera);
-    requestAnimationFrame(update);
   }
   // 描画
   update();
