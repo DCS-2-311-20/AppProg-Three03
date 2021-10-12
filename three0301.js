@@ -1,5 +1,5 @@
 //
-// 応用プログラミング 課題5.1
+// 応用プログラミング 課題5.1 G084002020 拓殖太郎
 // $Id$
 //
 "use strict"; // 厳格モード
@@ -25,27 +25,63 @@ function init() {
   const scene = new THREE.Scene();
 
   // 立方体 作成
-  const cubeGeometry = new THREE.Geometry();
+  const cubeGeometry = new THREE.BufferGeometry();
   // 立方体の頂点の座標
-  cubeGeometry.vertices = [
-    new THREE.Vector3(-1,-1,-1),
-    new THREE.Vector3( 1,-1,-1),
-    new THREE.Vector3(-1, 1,-1),
-    new THREE.Vector3( 1, 1,-1),
-    new THREE.Vector3(-1,-1, 1),
-    new THREE.Vector3( 1,-1, 1),
-    new THREE.Vector3(-1, 1, 1),
-    new THREE.Vector3( 1, 1, 1)
-  ];
-  // 立方体の面
-  cubeGeometry.faces = [
-    new THREE.Face3(0, 2, 1, new THREE.Vector3( 0, 0,-1)),
-    new THREE.Face3(0, 4, 2, new THREE.Vector3(-1, 0, 0)),
-    new THREE.Face3(0, 1, 4, new THREE.Vector3( 0,-1, 0)),
-    new THREE.Face3(7, 6, 5, new THREE.Vector3( 0, 0, 1)),
-    new THREE.Face3(7, 5, 3, new THREE.Vector3( 1, 0, 0)),
-    new THREE.Face3(7, 3, 6, new THREE.Vector3( 0, 1, 0)),
-  ];
+  const positions = new Float32Array([
+    -1,-1,-1,
+    -1, 1,-1,
+     1,-1,-1,
+
+    -1,-1,-1,
+    -1,-1, 1,
+    -1, 1,-1,
+
+    -1,-1,-1,
+     1,-1,-1,
+    -1,-1, 1,
+
+     1, 1, 1,
+    -1, 1, 1,
+     1,-1, 1,
+
+     1, 1, 1,
+     1,-1, 1,
+     1, 1,-1,
+
+     1, 1, 1,
+     1, 1,-1,
+    -1, 1, 1,
+  ]);
+  // 立方体の面の法線ベクトル
+  const normals = new Float32Array([
+     0, 0,-1,
+     0, 0,-1,
+     0, 0,-1,
+
+    -1, 0, 0,
+    -1, 0, 0,
+    -1, 0, 0,
+
+     0,-1, 0,
+     0,-1, 0,
+     0,-1, 0,
+
+     0, 0, 1,
+     0, 0, 1,
+     0, 0, 1,
+
+     1, 0, 0,
+     1, 0, 0,
+     1, 0, 0,
+
+     0, 1, 0,
+     0, 1, 0,
+     0, 1, 0,
+  ]);
+  cubeGeometry.setAttribute('position',
+    new THREE.BufferAttribute(positions, 3))
+  cubeGeometry.setAttribute('normal',
+      new THREE.BufferAttribute(normals, 3))
   // 立方体のマテリアル
   const cubeMaterial = new THREE.MeshNormalMaterial();
   cubeMaterial.side = THREE.DoubleSide;
@@ -117,9 +153,9 @@ function init() {
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
     // 物体の回転
-    cube.rotation.x += 0.01*rotateSpeed.x;
-    cube.rotation.y += 0.01*rotateSpeed.y;
-    cube.rotation.z += 0.01*rotateSpeed.z;
+    cubes.rotation.x += 0.01*rotateSpeed.x;
+    cubes.rotation.y += 0.01*rotateSpeed.y;
+    cubes.rotation.z += 0.01*rotateSpeed.z;
     // 次のフレーム描画時の呼び出しを要求
     requestAnimationFrame(update);
   }
